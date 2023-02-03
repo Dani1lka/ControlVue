@@ -1,11 +1,20 @@
 <template>
   <div class="container column">
+
     <app-form @add="addBlock"></app-form>
     <app-view :blocks="blocks"></app-view>
   </div>
   <div class="container">
     <app-loader v-if="loading"></app-loader>
     <app-comments v-else :comments="comments" @load-comments="loadcom"></app-comments>
+
+    <resume-form @block-added="addBlock"></resume-form>
+    <resume-view :blocks="blocks"></resume-view>
+  </div>
+  <div class="container">
+    <app-loader v-if="loading"></app-loader>
+    <resume-comments v-else :comments="comments" @load-comments="loadComments"></resume-comments>
+
   </div>
 </template>
 
@@ -35,4 +44,3 @@ export default {
   },
   components: {AppForm, AppView, AppComments, AppLoader}
 }
-</script>
