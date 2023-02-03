@@ -1,26 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container column">
+    <app-form @add="addBlock"></app-form>
+    <app-view :blocks="blocks"></app-view>
+  </div>
+  <div class="container">
+    <app-loader v-if="loading"></app-loader>
+    <app-comments v-else :comments="comments" @load-comments="loadcom"></app-comments>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppForm from './AppForm'
+import AppView from './AppView'
+import AppComments from './AppComments'
+import AppLoader from './AppLoader'
+
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  data() {
+    return {
+      blocks: [],
+      comments: [],
+      loading: false
+    }
+  },
+  methods: {
+    async loadcom() {
+      this.loading = true
+     
+    },
+    addBlock(block) {
+      this.blocks.push(block)
+    }
+  },
+  components: {AppForm, AppView, AppComments, AppLoader}
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
